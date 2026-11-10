@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>AI 出题</title></head>
+<body>
+    <h1>AI 出题</h1>
+    <a href="/"> ← 回首页</a>
+
+    <form action="/quiz" method="post">
+        <button type="submit"> 根据我的学习记录出题</button>
+    </form>
+
+    {% if questions %}
+        <h2> AI 出的题:</h2>
+        <div>{{ questions | safe}}</div>
+    {% endif %}
+</body>
+</html>

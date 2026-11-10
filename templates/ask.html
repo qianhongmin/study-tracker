@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>问 AI</title></head>
+<body>
+    <h1>问 AI</h1>
+    <form action="/ai" method="post">
+        <input type="text" name="question" placeholder="问点什么" style="width:300px">
+        <button type="submit">提问</button>
+    </form>
+
+    {% if answer %}
+        <h2>AI 回答：</h2>
+        <p>{{ answer }}</p>
+    {% endif %}
+</body>
+</html>

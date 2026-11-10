@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+study.db
+study_log.json
+ai_test.py
+ai_quiz.py
+*.zip
+*.rar

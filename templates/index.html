@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的学习记录</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+    <h1>学习记录</h1>
+
+    <form action="/add" method="post" >
+        <input type="text" name="科目" placeholder="科目">
+        <input type="text" name="分钟" placeholder="分钟">
+        <input type="text" name="笔记" placeholder="笔记">
+        <button type="submit"> 记录</button>
+    </form>
+
+    <ul>
+        {% for rec in records %}
+            <li>{{ rec['subject'] }} - {{ rec['minutes'] }}分钟 - {{ rec['note'] }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>各科目合计</h2>
+    <ul>
+        {% for s in stats %}
+            <li>{{ s['subject']}} 共{{ s['total']}} 分钟</li>
+        {% endfor %}
+    </ul>
+
+    <h2>每天学习时长</h2>
+    <ul>
+        {% for d in daily %}
+            <li>{{ d['date']}} 共{{ d['total']}} 分钟</li>
+        {% endfor %}
+    </ul>
+
+    <h2>学习趋势图</h2>
+    <canvas id="myChart" width="500" height="200"></canvas>
+
+    <script src="{{ url_for('static', filename='chart.umd.js') }}"></script>
+    <script>
+        const daily = {{ daily | tojson }};
+        const labels = daily.map(d => d.date);
+        const values = daily.map(d => d.total);
+
+        new Chart(document.getElementById('myChart'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '每天学习分钟',
+                    data: values,
+                }]
+            }
+        });
+    </script>
+
+
+</body>
+</html>
